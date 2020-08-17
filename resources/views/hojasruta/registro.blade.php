@@ -8,8 +8,7 @@
 <div class="card border-info">
     <div class="card-header bg-info">
         <h4 class="mb-0 text-white">
-            CATEGORIAS &nbsp;&nbsp;
-            <button type="button" class="btn waves-effect waves-light btn-sm btn-warning" onclick="nueva_categoria()"><i class="fas fa-plus"></i> &nbsp; NUEVA CATEGORIA</button>
+            REGISTRO DE HOJA DE RUTA
         </h4>
     </div>
     <div class="card-body" id="lista">
