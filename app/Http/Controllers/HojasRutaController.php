@@ -8,6 +8,7 @@ class HojasRutaController extends Controller
 {
     public function registro()
     {
-        echo "hojas desde hojas ruta";
+        // echo "hojas desde hojas ruta";
+        return view('hojasruta.registro');
     }
 }
