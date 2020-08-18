@@ -19,3 +19,7 @@ Route::get('/', function () {
 
 // HOJAS DE RUTA
 Route::get('HojasRuta/registro', 'HojasRutaController@registro');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
