@@ -13,109 +13,74 @@
     <div class="col-md-12">
         <div class="card border-info">
             <div class="card-header bg-info">
-                <h4 class="mb-0 text-white">GENERACION DE LA FACTURA</h4>
+                <h4 class="mb-0 text-white">NUEVA CORRESPONDENCIA</h4>
             </div>
             <div class="card-body">
-                <form action="{{ url('Factura/guardaVenta') }}" method="POST" id="formularioVenta">
+                <form action="{{ url('HojasRuta/guarda') }}" method="POST" id="formularioRegistro">
                     @csrf
-                    <div class="row">
-                        <div class="col-md-6">
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label class="control-label">Nit</label>
-                                <input type="text" name="nit" id="nit" class="form-control" required>
+                                <label class="control-label">
+                                    Hoja de Ruta
+                                    <span class="text-danger">
+                                        <i class="mr-2 mdi mdi-alert-circle"></i>
+                                    </span>
+                                </label>
+                                <input type="text" name="hoja_ruta" id="hoja_ruta" class="form-control" required autofocus />
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label class="control-label">Razon Social / nombre</label>
-                                <input type="text" name="nombre" id="nombre" class="form-control" required>
-                                <input type="hidden" name="totalVenta" id="totalVenta" />
+                                <label class="control-label">
+                                    Fecha
+                                    <span class="text-danger">
+                                        <i class="mr-2 mdi mdi-alert-circle"></i>
+                                    </span>
+                                </label>
+                                <input type="date" name="fecha" id="fecha" class="form-control" value="{{ date("Y-m-d") }}" required>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Unidad Solicitante
+                                    <span class="text-danger">
+                                        <i class="mr-2 mdi mdi-alert-circle"></i>
+                                    </span>
+                                </label>
+                                <input type="text" name="unidad_solicitante" id="unidad_solicitante" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Detalle
+                                    <span class="text-danger">
+                                        <i class="mr-2 mdi mdi-alert-circle"></i>
+                                    </span>
+                                </label>
+                                <input type="text" name="detalle" id="detalle" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="row justify-content-md-center">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label">Producto</label>
-                                <input type="text" name="producto" id="producto" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                <label class="control-label">Cantidad</label>
-                                <input type="number" name="cantidad" id="cantidad" class="form-control" min="1">
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label class="control-label">Precio</label>
-                                <input type="number" name="precio" id="precio" class="form-control" min="1" step="any">
-                            </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label class="control-label">Subtotal</label>
-                                <input type="text" name="subtotal" id="subtotal" class="form-control" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                <label class="control-label">&nbsp;</label>
-                                <button type="button" onclick="adicionar()"
-                                    class="btn btn-block btn-success">Adicionar</button>
+                                <label class="control-label">Observaciones</label>
+                                <input type="text" name="observacion" id="observacion" class="form-control" >
                             </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-12" id="bloqueProductosUnidad">
-                            <div class="card border-primary">
-                                <div class="card-header bg-primary">
-                                    <h4 class="mb-0 text-white">PRODUCTOS POR UNIDAD</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive m-t-40">
-                                        <table id="tablaPedido"
-                                            class="tablesaw table-striped table-hover table-bordered table no-wrap">
-                                            <thead>
-                                                <tr>
-                                                    <th>NOMBRE</th>
-                                                    <th>CANTIDAD</th>
-                                                    <th>PRECIO</th>
-                                                    <th>SUBTOTAL</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th>TOTAL</th>
-                                                    <th>
-                                                        <div id="montoTotal"></div>
-                                                    </th>
-                                                    <th></th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-6">
+                            <button type="submit" class="btn waves-effect waves-light btn-block btn-success text-white">REGISTRAR CORRESPONDENCIA</button>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit"
-                            class="btn waves-effect waves-light btn-block btn-success text-white">REGISTRAR
-                            VENTA</button>
                     </div>
 
                 </form>

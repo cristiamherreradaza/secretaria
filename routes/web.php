@@ -21,6 +21,7 @@ Route::get('/', 'Auth\LoginController@inicio');
 
 // HOJAS DE RUTA
 Route::get('HojasRuta/registro', 'HojasRutaController@registro');
+Route::post('HojasRuta/guarda', 'HojasRutaController@guarda');
 
 Auth::routes();
 
