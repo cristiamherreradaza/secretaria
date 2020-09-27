@@ -15,6 +15,13 @@ class CreateArchivosHojasTable extends Migration
     {
         Schema::create('archivos_hojas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('hojas_ruta_id')->nullable();
+            $table->foreign('hojas_ruta_id')->references('id')->on('hojas_rutas');
+            $table->datetime('fecha')->nullable();
+            $table->string('estado', 30)->nullable();
+            $table->datetime('deleted_at')->nullable();
             $table->timestamps();
         });
     }

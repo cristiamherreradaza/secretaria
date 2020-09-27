@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHistoricosTable extends Migration
+class CreateNumerosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,17 @@ class CreateHistoricosTable extends Migration
      */
     public function up()
     {
-        Schema::create('historicos', function (Blueprint $table) {
+        Schema::create('numeros', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('hojas_ruta_id')->nullable();
             $table->foreign('hojas_ruta_id')->references('id')->on('hojas_rutas');
-            $table->text('original')->nullable();
-            $table->text('cambio')->nullable();
+            $table->unsignedBigInteger('documento_id')->nullable();
+            $table->foreign('documento_id')->references('id')->on('documentos');
+            $table->integer('numero')->nullable();
+            $table->string('gestion', 4)->nullable();
             $table->datetime('fecha')->nullable();
-            $table->string('estado', 30)->nullable();
             $table->datetime('deleted_at')->nullable();
             $table->timestamps();
         });
@@ -35,6 +36,6 @@ class CreateHistoricosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('historicos');
+        Schema::dropIfExists('numeros');
     }
 }
