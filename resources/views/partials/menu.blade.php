@@ -37,7 +37,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="{{ url('Combo/listado') }}" class="sidebar-link">
+                            <a href="{{ url('HojasRuta/listado') }}" class="sidebar-link">
                                 <i data-feather="list" class="feather-icon"></i><span class="hide-menu"> Listado </span>
                             </a>
                         </li>
