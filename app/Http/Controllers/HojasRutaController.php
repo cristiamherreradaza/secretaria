@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class HojasRutaController extends Controller
 {
     public function registro()
-    {
+        {
         // echo "hojas desde hojas ruta";
         return view('hojasruta.registro');
     }
@@ -25,6 +25,8 @@ class HojasRutaController extends Controller
         $hr->detalle            = $request->detalle;
         $hr->observacion        = $request->observacion;
         $hr->save();
+
+        return redirect('HojasRuta/listado');
     }
 
     public function listado()
@@ -36,9 +38,14 @@ class HojasRutaController extends Controller
     {
         $hr = Hojas_ruta::select(
                             'hojas_rutas.id',
+                            'users.name as nombre',
                             'hojas_rutas.hoja_ruta',
-                            'hojas_rutas.hoja_ruta'
-                        )->orderBy('id', 'desc');
+                            'hojas_rutas.fecha',
+                            'hojas_rutas.unidad_solicitante',
+                            'hojas_rutas.detalle'
+                        )
+                        ->leftJoin('users', 'hojas_rutas.user_id', '=', 'users.id')
+                        ->orderBy('id', 'desc');
 
         return Datatables::of($hr)->addColumn('action', function ($hr) {
             return '<button type="button" class="btn btn-info" title="Ver pedido" onclick="ver_pedido(' . $hr->id . ')"><i class="fas fa-eye"></i></button>

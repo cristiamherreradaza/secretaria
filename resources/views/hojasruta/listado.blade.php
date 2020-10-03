@@ -22,7 +22,11 @@
                     <thead>
                         <tr>
                             <th>ID</th>
+                            <th>Usuario</th>
                             <th>Hoja</th>
+                            <th>Fecha</th>
+                            <th>Unidad</th>
+                            <th>Detalle</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
@@ -54,7 +58,11 @@
         ajax: "{{ url('HojasRuta/ajax_listado') }}",
         columns: [
             {data: 'id', name: 'id'},
+            {data: 'nombre', name: 'users.name'},
             {data: 'hoja_ruta', name: 'hoja_ruta'},
+            {data: 'fecha', name: 'fecha'},
+            {data: 'unidad_solicitante', name: 'unidad_solicitante'},
+            {data: 'detalle', name: 'detalle'},
             {data: 'action'},
         ],
         language: {

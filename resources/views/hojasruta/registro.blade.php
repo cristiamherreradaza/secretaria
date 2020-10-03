@@ -113,10 +113,19 @@
 
     function registraHr()
     {
-        if ($("#formularioRegistro")[0].checkValidity()) {
+        if ($("#formularioRegistro")[0].checkValidity()) 
+        {
             $("#btnRegistra").toggle();
             $("#btnEsperaRegistro").toggle();
-0        }else{
+
+            $("#formularioRegistro").submit();
+            Swal.fire({
+                type: 'success',
+                title: 'Excelente',
+                text: 'Se registro'
+            });
+
+        }else{
             $("#formularioRegistro")[0].reportValidity();
         }
     }
