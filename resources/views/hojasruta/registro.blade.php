@@ -52,7 +52,7 @@
                                         <i class="mr-2 mdi mdi-alert-circle"></i>
                                     </span>
                                 </label>
-                                <input type="text" name="unidad_solicitante" id="unidad_solicitante" class="form-control" required>
+                                <input type="text" name="unidad_solicitante" id="unidad_solicitante" class="form-control" required autocomplete="on">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -79,7 +79,11 @@
 
                     <div class="row justify-content-md-center">
                         <div class="col-md-6">
-                            <button type="submit" class="btn waves-effect waves-light btn-block btn-success text-white">REGISTRAR CORRESPONDENCIA</button>
+                            <button class="btn btn-primary btn-block" type="button" id="btnEsperaRegistro" style="display: none;" disabled>
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Cargando...
+                            </button>
+                            <button type="button" id="btnRegistra" class="btn waves-effect waves-light btn-block btn-success text-white" onclick="registraHr();">REGISTRAR CORRESPONDENCIA</button>
                         </div>
                     </div>
 
@@ -94,13 +98,6 @@
 <script src="{{ asset('assets/libs/datatables/media/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('dist/js/pages/datatable/custom-datatable.js') }}"></script>
 <script>
-    var totalImporte = 0;
-
-    var cantidad = document.getElementById('cantidad');
-    cantidad.addEventListener('keyup', multiplicaCantidad);
-
-    var precio = document.getElementById('precio');
-    precio.addEventListener('keyup', multiplicaPrecio);
 
     $.ajaxSetup({
         // definimos cabecera donde estarra el token y poder hacer nuestras operaciones de put,post...
@@ -111,68 +108,17 @@
 
 
     $(document).ready(function () {
-        $('#tablaPedido tbody').on('click', '.btnElimina', function () {
-            t.row($(this).parents('tr'))
-                .remove()
-                .draw();
-            let itemBorrar = $(this).closest("tr").find("td:eq(0)").text();
-        });
 
     });
 
-    var t = $('#tablaPedido').DataTable({
-        paging: false,
-        searching: false,
-        ordering:  false,   
-        info: false,
-        language: {
-            url: '{{ asset('datatableEs.json') }}'
-        },
-    });
-
-    function multiplicaCantidad()
+    function registraHr()
     {
-        let cantidad = document.getElementById("cantidad").value;
-        let precio = document.getElementById("precio").value;
-        document.getElementById("subtotal").value=cantidad*precio;
-        // console.log(cantidad*precio);
-    }
-
-    function multiplicaPrecio()
-    {
-        let cantidad = document.getElementById("cantidad").value;
-        let precio = document.getElementById("precio").value;
-        document.getElementById("subtotal").value=cantidad*precio;
-    }
-
-    function adicionar()
-    {
-        let producto = document.getElementById("producto").value;
-        let cantidad = document.getElementById("cantidad").value;
-        let precio   = document.getElementById("precio").value;
-        let subtotal = document.getElementById("subtotal").value;
-        
-        totalImporte = Number(totalImporte) + Number(subtotal); 
-        document.getElementById("montoTotal").innerHTML = totalImporte;
-        document.getElementById("totalVenta").value = totalImporte;
-
-        t.row.add([
-            `<input type="text" name="producto[]" value="`+producto+`" class="form-control" readonly >`,
-            `<input type="text" name="cantidad[]" value="`+cantidad+`" class="form-control text-right" style="width: 80px;" readonly >`,
-            `<input type="text" name="precio[]" value="`+precio+`" class="form-control text-right" style="width: 80px;" readonly >`,
-            `<input type="text" name="subtotal[]" value="`+subtotal+`" class="form-control text-right" style="width: 80px;" readonly >`,
-            '<button type="button" class="btnElimina btn btn-danger" title="Elimina Producto"><i class="fas fa-trash-alt"></i></button>'
-        ]).draw(false);
-        // console.log(producto);
-
-        document.getElementById("producto").value = "";
-        document.getElementById("cantidad").value = "";
-        document.getElementById("precio").value = "";
-        document.getElementById("subtotal").value = "";
-
-        document.getElementById("producto").focus();
-        
-
+        if ($("#formularioRegistro")[0].checkValidity()) {
+            $("#btnRegistra").toggle();
+            $("#btnEsperaRegistro").toggle();
+0        }else{
+            $("#formularioRegistro")[0].reportValidity();
+        }
     }
 
 </script>

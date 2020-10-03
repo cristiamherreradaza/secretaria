@@ -36,6 +36,7 @@ class HojasRutaController extends Controller
     {
         $hr = Hojas_ruta::select(
                             'hojas_rutas.id',
+                            'hojas_rutas.hoja_ruta',
                             'hojas_rutas.hoja_ruta'
                         )->orderBy('id', 'desc');
 
@@ -44,6 +45,11 @@ class HojasRutaController extends Controller
                                     <button type="button" class="btn btn-success" title="Bajar pedido en Excel"  onclick="excel(' . $hr->id . ')"><i class="fas fa-file-excel"></i></button>';
         })->make(true);
 
+    }
+
+    public function secretaria()
+    {
+        
     }
 
 
