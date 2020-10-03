@@ -48,16 +48,16 @@ class HojasRutaController extends Controller
                         ->orderBy('id', 'desc');
 
         return Datatables::of($hr)->addColumn('action', function ($hr) {
-            return '<button type="button" class="btn btn-info" title="Ver pedido" onclick="ver_pedido(' . $hr->id . ')"><i class="fas fa-eye"></i></button>
+            return '<button type="button" class="btn btn-info" title="Ver pedido" onclick="asignar(' . $hr->id . ')"><i class="fas fa-eye"></i></button>
                                     <button type="button" class="btn btn-success" title="Bajar pedido en Excel"  onclick="excel(' . $hr->id . ')"><i class="fas fa-file-excel"></i></button>';
         })->make(true);
 
     }
 
-    public function secretaria()
+    public function asignacion(Request $request, $hrId)
     {
-        
+        $datosHojaRuta = Hojas_ruta::where('id', $hrId)->first();
+        return view('hojasruta.asignacion')->with(compact('datosHojaRuta'));
     }
-
 
 }
