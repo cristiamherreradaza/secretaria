@@ -21,6 +21,7 @@ class CreateHojasRutasTable extends Migration
             $table->foreign('unidade_id')->references('id')->on('users');
             $table->string('hoja_ruta', 150)->nullable();
             $table->date('fecha')->nullable();
+            $table->datetime('fecha_asignacion')->nullable();
             $table->string('unidad_solicitante', 150)->nullable();
             $table->string('detalle', 500)->nullable();
             $table->string('observacion', 500)->nullable();

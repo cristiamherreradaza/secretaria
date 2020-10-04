@@ -15,9 +15,9 @@ class CreateObservacionesTable extends Migration
     {
         Schema::create('observaciones', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('hojas')->nullable();
-            $table->foreign('hojas')->references('id')->on('users');
-            $table->string('nombre', 150)->nullable();
+            $table->unsignedBigInteger('hojas_ruta')->nullable();
+            $table->foreign('hojas_ruta')->references('id')->on('hojas_rutas');
+            $table->string('observacion', 800)->nullable();
             $table->string('estado', 30)->nullable();
             $table->datetime('deleted_at')->nullable();
             $table->timestamps();

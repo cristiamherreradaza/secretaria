@@ -11,9 +11,9 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
-        <div class="card border-info">
-            <div class="card-header bg-info">
-                <h4 class="mb-0 text-white">NUEVA CORRESPONDENCIA</h4>
+        <div class="card border-primary">
+            <div class="card-header bg-primary">
+                <h4 class="mb-0 text-white">ASIGNACION CORRESPONDENCIA</h4>
             </div>
             <div class="card-body">
                 <div class="row justify-content-md-center">
@@ -25,7 +25,15 @@
                                     <i class="mr-2 mdi mdi-alert-circle"></i>
                                 </span>
                             </label>
-                            <input type="text" name="hoja_ruta" id="hoja_ruta" class="form-control" value="{{ $datosHojaRuta->hoja_ruta }}" readonly />
+                            {{-- <input type="text" name="hoja_ruta" id="hoja_ruta" class="form-control" value="{{ $datosHojaRuta->hoja_ruta }}" readonly />
+                            <button type="button" class="btn btn-danger" title="Eliminar" onclick="eliminar()"><i class="fas fa-times"></i></button> --}}
+
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" value="{{ $datosHojaRuta->hoja_ruta }}" readonly>
+                                <div class="input-group-append">
+                                    <button class="btn btn-info" type="button" onclick="adjuntaHr()"><i class="fas fa-paperclip"></i></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -109,32 +117,6 @@
                     </div>
 
                     <div class="row justify-content-md-center">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label class="control-label">
-                                    Unidad Solicitante
-                                    <span class="text-danger">
-                                        <i class="mr-2 mdi mdi-alert-circle"></i>
-                                    </span>
-                                </label>
-                                <input type="text" name="unidad_solicitante" id="unidad_solicitante"
-                                    class="form-control" required autocomplete="on">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label class="control-label">
-                                    Detalle
-                                    <span class="text-danger">
-                                        <i class="mr-2 mdi mdi-alert-circle"></i>
-                                    </span>
-                                </label>
-                                <input type="text" name="detalle" id="detalle" class="form-control" required>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row justify-content-md-center">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Observaciones</label>
@@ -196,6 +178,11 @@
         }else{
             $("#formularioRegistro")[0].reportValidity();
         }
+    }
+
+    function adjuntaHr()
+    {
+        console.log("entro");
     }
 
 </script>

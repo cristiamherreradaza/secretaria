@@ -24,7 +24,7 @@
                             <th>ID</th>
                             <th>Usuario</th>
                             <th>Hoja</th>
-                            <th>Fecha</th>
+                            <th>Ingreso</th>
                             <th>Unidad</th>
                             <th>Detalle</th>
                             <th>Opciones</th>
