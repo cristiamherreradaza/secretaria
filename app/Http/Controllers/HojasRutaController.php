@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DataTables;
+use App\Unidade;
 use App\Hojas_ruta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,16 +49,19 @@ class HojasRutaController extends Controller
                         ->orderBy('id', 'desc');
 
         return Datatables::of($hr)->addColumn('action', function ($hr) {
-            return '<button type="button" class="btn btn-info" title="Ver pedido" onclick="asignar(' . $hr->id . ')"><i class="fas fa-eye"></i></button>
-                                    <button type="button" class="btn btn-success" title="Bajar pedido en Excel"  onclick="excel(' . $hr->id . ')"><i class="fas fa-file-excel"></i></button>';
+            return '<button type="button" class="btn btn-info" title="Asignar" onclick="asignar(' . $hr->id . ')"><i class="fas fa-arrow-alt-circle-right"></i></button>
+                    <button type="button" class="btn btn-warning" title="Editar"  onclick="editar(' . $hr->id . ')"><i class="fas fa-pencil-alt"></i></button>
+                    <button type="button" class="btn btn-danger" title="Eliminar"  onclick="eliminar(' . $hr->id . ')"><i class="fas fa-times"></i></button>';
         })->make(true);
 
     }
 
-    public function asignacion(Request $request, $hrId)
+    public function asignar(Request $request, $hrId)
     {
         $datosHojaRuta = Hojas_ruta::where('id', $hrId)->first();
-        return view('hojasruta.asignacion')->with(compact('datosHojaRuta'));
+        $unidades = Unidade::all();
+        // dd($datosHojaRuta);
+        return view('hojasruta.asignacion')->with(compact('datosHojaRuta', 'unidades'));
     }
 
 }
