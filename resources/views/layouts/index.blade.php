@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Sistema de Ventas</title>
+    <title>UMSA SECRETARIA</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/monsteradmin/" />
     <link href="{{ asset('dist/css/style.min.css') }}" rel="stylesheet">
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
