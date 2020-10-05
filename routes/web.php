@@ -23,8 +23,11 @@ Route::get('/', 'Auth\LoginController@inicio');
 Route::get('HojasRuta/registro', 'HojasRutaController@registro');
 Route::get('HojasRuta/listado', 'HojasRutaController@listado');
 Route::get('HojasRuta/ajax_listado', 'HojasRutaController@ajax_listado');
+Route::get('HojasRuta/ajax_asignados', 'HojasRutaController@ajax_asignados');
+Route::get('HojasRuta/asignados', 'HojasRutaController@asignados');
 Route::get('HojasRuta/asignar/{id}', 'HojasRutaController@asignar');
 Route::post('HojasRuta/guarda', 'HojasRutaController@guarda');
+Route::post('HojasRuta/guardaAsignacion', 'HojasRutaController@guardaAsignacion');
 
 Auth::routes();
 

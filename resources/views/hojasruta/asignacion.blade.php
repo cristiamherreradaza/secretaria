@@ -85,17 +85,18 @@
 
                 <h4 class="text-center">ASIGNACION</h4>
                 
-                <form action="{{ url('HojasRuta/guarda') }}" method="POST" id="formularioRegistro">
+                <form action="{{ url('HojasRuta/guardaAsignacion') }}" method="POST" id="formularioRegistro" enctype="multipart/form-data" />
                     @csrf
                     <div class="row justify-content-md-center">
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label class="control-label">
-                                    Hoja de Ruta
+                                    Asignar
                                     <span class="text-danger">
                                         <i class="mr-2 mdi mdi-alert-circle"></i>
                                     </span>
                                 </label>
+                                <input type="hidden" name="hojaRutaId" value="{{ $datosHojaRuta->id }}">
                                 <select name="unidade_id" id="unidade_id" class="form-control">
                                     @foreach($unidades as $u)
                                     <option value="{{ $u->id }}">{{ $u->nombre }}</option>
@@ -106,12 +107,9 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label class="control-label">
-                                    Fecha
-                                    <span class="text-danger">
-                                        <i class="mr-2 mdi mdi-alert-circle"></i>
-                                    </span>
+                                    Adjuntar archivos
                                 </label>
-                                <input type="file" id="files" class="form-control" name="files" multiple>
+                                <input type="file" id="archivos" class="form-control" name="archivos[]" multiple />
                             </div>
                         </div>
                     </div>
@@ -134,7 +132,7 @@
                             </button>
                             <button type="button" id="btnRegistra"
                                 class="btn waves-effect waves-light btn-block btn-success text-white"
-                                onclick="registraHr();">REGISTRAR CORRESPONDENCIA</button>
+                                onclick="registraHr();">ASIGNAR CORRESPONDENCIA</button>
                         </div>
                     </div>
 
