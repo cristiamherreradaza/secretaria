@@ -29,6 +29,9 @@ Route::get('HojasRuta/asignar/{id}', 'HojasRutaController@asignar');
 Route::post('HojasRuta/guarda', 'HojasRutaController@guarda');
 Route::post('HojasRuta/guardaAsignacion', 'HojasRutaController@guardaAsignacion');
 
+// USUARIOS
+Route::get('Users/listado', 'UserController@listado');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
