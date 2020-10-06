@@ -10,15 +10,11 @@
                     <div class="user-profile text-center position-relative pt-4 mt-1">
                         <!-- User profile image -->
                         <div class="profile-img m-auto">
-                            {{-- @if(auth()->user()->image)
-                                <img src="{{ asset('assets/images/users/'.auth()->user()->image) }}" alt="user" class="w-100 rounded-circle">
-                            @else
-                                <img src="{{ asset('assets/images/users/usuario.png') }}" alt="user" class="w-100 rounded-circle">
-                            @endif --}}
+                            <img src="{{ asset('assets/images/users/usuario.png') }}" alt="user" class="w-100 rounded-circle">
                         </div>
                         <!-- User profile text-->
                         <div class="profile-text py-1 text-white">
-                            {{-- {{ auth()->user()->name }}   --}}
+                            {{ auth()->user()->name }}  
                         </div>
                     </div>
                     <!-- End User profile text-->
@@ -42,6 +38,12 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark" href="{{ url('Users/listado') }}" aria-expanded="false">
+                        <i data-feather="file-text" class="feather-icon"></i><span class="hide-menu"> USUARIOS </span>
+                    </a>
                 </li>
 
                 {{-- @php
@@ -86,16 +88,6 @@
                         @endif
                     @endif
                 @endforeach --}}
-
-
-                <li class="nav-devider"></li>
-                <li class="nav-small-cap"><i class="mdi mdi-dots-horizontal"></i> <span class="hide-menu">Otros</span>
-                </li>
-                <li class="sidebar-item"> 
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('Producto/info') }}" aria-expanded="false">
-                        <i data-feather="codepen" class="feather-icon"></i><span class="hide-menu">Informacion</span>
-                    </a>
-                </li>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->
@@ -108,7 +100,7 @@
         <!-- item-->
         <a href="" class="link" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
         <!-- item-->
-        {{-- <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="link" data-toggle="tooltip" title="Cerrar Sesión"><i class="mdi mdi-power"></i></a> --}}
+        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="link" data-toggle="tooltip" title="Cerrar Sesión"><i class="mdi mdi-power"></i></a>
     </div>
     <!-- End Bottom points-->
 </aside>
