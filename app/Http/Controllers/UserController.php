@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Unidade;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -11,6 +12,8 @@ class UserController extends Controller
     {
         $usuarios = User::all();
         // dd($usuarios);
-        return view('user.listado')->with(compact('usuarios'));
+        $unidades = Unidade::all();
+
+        return view('user.listado')->with(compact('usuarios', 'unidades'));
     }
 }

@@ -54,14 +54,14 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">NUEVA CATEGORIA</h4>
+                <h4 class="modal-title" id="myModalLabel">NUEVA CLIENTE</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-            <form action="{{ url('Categoria/guardar') }}" method="POST">
+            <form action="{{ url('User/guardar') }}" method="POST">
                 @csrf
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-7">
                             <div class="form-group">
                                 <label class="control-label">Nombre</label>
                                 <span class="text-danger">
@@ -69,6 +69,41 @@
                                 </span>
                                 <input name="nombre_categoria" type="text" id="nombre_categoria" class="form-control"
                                     required>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Asignar
+                                    <span class="text-danger">
+                                        <i class="mr-2 mdi mdi-alert-circle"></i>
+                                    </span>
+                                </label>
+                                <input type="hidden" name="usuarioId" value="">
+                                <select name="unidade_id" id="unidade_id" class="form-control">
+                                    @foreach($unidades as $u)
+                                    <option value="{{ $u->id }}">{{ $u->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Rol
+                                    <span class="text-danger">
+                                        <i class="mr-2 mdi mdi-alert-circle"></i>
+                                    </span>
+                                </label>
+                                <input type="hidden" name="usuarioId" value="">
+                                <select name="unidade_id" id="unidade_id" class="form-control">
+                                    <option value="Administrador">Administrador</option>
+                                    <option value="Secretaria">Secretaria</option>
+                                    <option value="Mensajero">Mensajero</option>
+                                </select>
                             </div>
                         </div>
                     </div>
