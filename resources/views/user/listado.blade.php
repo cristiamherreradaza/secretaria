@@ -20,6 +20,7 @@
                     <tr>
                         <th>#</th>
                         <th>Nombre</th>
+                        <th>Email</th>
                         <th>Rol</th>
                         <th>Unidad</th>
                         <th></th>
@@ -30,11 +31,12 @@
                     <tr>
                         <td>{{ ($key+1) }}</td>
                         <td>{{ $usuario->name }}</td>
+                        <td>{{ $usuario->email }}</td>
                         <td>{{ $usuario->rol }}</td>
                         <td>{{ $usuario->unidade->nombre }}</td>
                         <td>
                             <button type="button" class="btn btn-warning" title="Editar usuarios"
-                                onclick="editar('{{ $usuario->id }}', '{{ $usuario->name }}')"><i
+                                onclick="editar('{{ $usuario->id }}', '{{ $usuario->name }}', '{{ $usuario->email }}', '{{ $usuario->rol }}', '{{ $usuario->unidade_id }}')"><i
                                     class="fas fa-edit"></i></button>
                             <button type="button" class="btn btn-danger" title="Eliminar usuarios"
                                 onclick="eliminar('{{ $usuario->id }}', '{{ $usuario->name }}')"><i
@@ -67,7 +69,7 @@
                                 <span class="text-danger">
                                     <i class="mr-2 mdi mdi-alert-circle"></i>
                                 </span>
-                                <input type="hidden" name="id" value="">
+                                <input type="hidden" name="id" id="id">
                                 <input name="nombre" type="text" id="nombre" class="form-control"
                                     required>
                             </div>
@@ -86,7 +88,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label class="control-label">Password</label>
-                                <span class="text-danger">
+                                <span class="text-danger" id="advertenciaPass">
                                     <i class="mr-2 mdi mdi-alert-circle"></i>
                                 </span>
                                 <input name="password" type="text" id="password" class="form-control" required>
@@ -104,7 +106,6 @@
                                         <i class="mr-2 mdi mdi-alert-circle"></i>
                                     </span>
                                 </label>
-                                <input type="hidden" name="usuarioId" value="">
                                 <select name="rol" id="rol" class="form-control">
                                     <option value="Administrador">Administrador</option>
                                     <option value="Secretaria">Secretaria</option>
@@ -192,6 +193,13 @@
 <script>
     function nuevo()
     {
+        $("#id").val('');
+        $("#nombre").val('');
+        $("#email").val('');
+        $("#rol").val('');
+        $("#password").val('');
+        $("#unidade_id").val('');
+
         $("#nuevo").modal('show');
     }
 
@@ -211,11 +219,16 @@
         // var nombre_categoria = $("#nombre_categoria").val();
     }
 
-    function editar(id, nombre)
+    function editar(id, nombre, email, rol, unidad)
     {
         $("#id").val(id);
         $("#nombre").val(nombre);
-        $("#editar_categorias").modal('show');
+        $("#email").val(email);
+        $("#rol").val(rol);
+        $("#unidade_id").val(unidad);
+        $("#advertenciaPass").hide();
+        $("#password").removeAttr('required');
+        $("#nuevo").modal('show');
     }
 
     function actualizar_categoria()

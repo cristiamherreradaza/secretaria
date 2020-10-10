@@ -20,11 +20,18 @@ class UserController extends Controller
 
     public function guarda(Request $request)
     {
-        $usuario             = new User();
+        // dd($request->all());
+        if($request->has('id')){
+            $usuario = User::find($request->id);
+        }else{
+            $usuario = new User();
+        }
+        if($request->password != null){
+            $usuario->password   = Hash::make($request->password);
+        }
         $usuario->name       = $request->nombre;
         $usuario->unidade_id = $request->unidade_id;
         $usuario->rol        = $request->rol;
-        $usuario->password   = Hash::make($request->password);
         $usuario->email      = $request->email;
         $usuario->save();
 
