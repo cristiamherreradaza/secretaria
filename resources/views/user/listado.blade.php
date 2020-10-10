@@ -9,7 +9,7 @@
     <div class="card-header bg-info">
         <h4 class="mb-0 text-white">
             USUARIOS &nbsp;&nbsp;
-            <button type="button" class="btn waves-effect waves-light btn-sm btn-warning" onclick="nueva_categoria()"><i
+            <button type="button" class="btn waves-effect waves-light btn-sm btn-warning" onclick="nuevo()"><i
                     class="fas fa-plus"></i> &nbsp; NUEVO USUARIO</button>
         </h4>
     </div>
@@ -49,44 +49,50 @@
 </div>
 
 
-<!-- inicio modal nueva categoria -->
-<div id="nueva_categoria" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<!-- inicio modal nuevo usuario -->
+<div id="nuevo" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">NUEVA CLIENTE</h4>
+                <h4 class="modal-title" id="myModalLabel">NUEVO USUARIO</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-            <form action="{{ url('User/guardar') }}" method="POST">
+            <form action="{{ url('User/guarda') }}" method="POST" id="formularioUsuario">
                 @csrf
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-7">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label class="control-label">Nombre</label>
                                 <span class="text-danger">
                                     <i class="mr-2 mdi mdi-alert-circle"></i>
                                 </span>
-                                <input name="nombre_categoria" type="text" id="nombre_categoria" class="form-control"
+                                <input type="hidden" name="id" value="">
+                                <input name="nombre" type="text" id="nombre" class="form-control"
                                     required>
                             </div>
                         </div>
-                        <div class="col-md-5">
+
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label class="control-label">
-                                    Asignar
-                                    <span class="text-danger">
-                                        <i class="mr-2 mdi mdi-alert-circle"></i>
-                                    </span>
-                                </label>
-                                <input type="hidden" name="usuarioId" value="">
-                                <select name="unidade_id" id="unidade_id" class="form-control">
-                                    @foreach($unidades as $u)
-                                    <option value="{{ $u->id }}">{{ $u->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                <label class="control-label">Email</label>
+                                <span class="text-danger">
+                                    <i class="mr-2 mdi mdi-alert-circle"></i>
+                                </span>
+                                <input name="email" type="text" id="email" class="form-control" required>
                             </div>
                         </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Password</label>
+                                <span class="text-danger">
+                                    <i class="mr-2 mdi mdi-alert-circle"></i>
+                                </span>
+                                <input name="password" type="text" id="password" class="form-control" required>
+                            </div>
+                        </div>
+                        
                     </div>
 
                     <div class="row">
@@ -99,18 +105,34 @@
                                     </span>
                                 </label>
                                 <input type="hidden" name="usuarioId" value="">
-                                <select name="unidade_id" id="unidade_id" class="form-control">
+                                <select name="rol" id="rol" class="form-control">
                                     <option value="Administrador">Administrador</option>
                                     <option value="Secretaria">Secretaria</option>
                                     <option value="Mensajero">Mensajero</option>
                                 </select>
                             </div>
                         </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Unidad
+                                    <span class="text-danger">
+                                        <i class="mr-2 mdi mdi-alert-circle"></i>
+                                    </span>
+                                </label>
+                                <select name="unidade_id" id="unidade_id" class="form-control">
+                                    @foreach($unidades as $u)
+                                    <option value="{{ $u->id }}">{{ $u->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn waves-effect waves-light btn-block btn-success"
-                        onclick="guardar_categoria()">GUARDAR CATEGORIA</button>
+                    <button type="button" class="btn waves-effect waves-light btn-block btn-success" onclick="guardar()">GUARDAR</button>
                 </div>
             </form>
         </div>
@@ -168,21 +190,25 @@
     });
 </script>
 <script>
-    function nueva_categoria()
+    function nuevo()
     {
-        $("#nueva_categoria").modal('show');
+        $("#nuevo").modal('show');
     }
 
-    function guardar_categoria()
+    function guardar()
     {
-        var nombre_categoria = $("#nombre_categoria").val();
-        if(nombre_categoria.length>0){
+        if ($("#formularioUsuario")[0].checkValidity()) {
+            $("#formularioUsuario").submit();
             Swal.fire(
                 'Excelente!',
-                'Una nueva categoria fue registrada.',
+                'Usuario registrado.',
                 'success'
             )
+
+        }else{
+            $("#formularioUsuario")[0].reportValidity();
         }
+        // var nombre_categoria = $("#nombre_categoria").val();
     }
 
     function editar(id, nombre)

@@ -30,7 +30,8 @@ Route::post('HojasRuta/guarda', 'HojasRutaController@guarda');
 Route::post('HojasRuta/guardaAsignacion', 'HojasRutaController@guardaAsignacion');
 
 // USUARIOS
-Route::get('Users/listado', 'UserController@listado');
+Route::get('User/listado', 'UserController@listado');
+Route::post('User/guarda', 'UserController@guarda');
 
 Auth::routes();
 

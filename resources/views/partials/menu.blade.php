@@ -41,7 +41,7 @@
                 </li>
 
                 <li class="sidebar-item">
-                    <a class="sidebar-link waves-effect waves-dark" href="{{ url('Users/listado') }}" aria-expanded="false">
+                    <a class="sidebar-link waves-effect waves-dark" href="{{ url('User/listado') }}" aria-expanded="false">
                         <i data-feather="file-text" class="feather-icon"></i><span class="hide-menu"> USUARIOS </span>
                     </a>
                 </li>
