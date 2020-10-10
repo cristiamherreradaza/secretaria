@@ -37,4 +37,10 @@ class UserController extends Controller
 
         return redirect('User/listado');
     }
+
+    public function eliminar(Request $request, $usuarioId)
+    {
+        User::destroy($usuarioId);
+        return redirect('User/listado');
+    }
 }

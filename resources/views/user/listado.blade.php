@@ -257,13 +257,12 @@
             cancelButtonText: "Cancelar",
         }).then((result) => {
             if (result.value) {
+                window.location.href = "{{ url('User/eliminar') }}/"+id;
                 Swal.fire(
                     'Excelente!',
                     'La categoria fue eliminada',
                     'success'
-                ).then(function() {
-                    window.location.href = "{{ url('Categoria/eliminar') }}/"+id;
-                });
+                );
             }
         })
     }
