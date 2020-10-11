@@ -28,6 +28,8 @@ Route::get('HojasRuta/asignados', 'HojasRutaController@asignados');
 Route::get('HojasRuta/asignar/{id}', 'HojasRutaController@asignar');
 Route::post('HojasRuta/guarda', 'HojasRutaController@guarda');
 Route::post('HojasRuta/guardaAsignacion', 'HojasRutaController@guardaAsignacion');
+Route::get('HojasRuta/editar/{idHR}', 'HojasRutaController@editar');
+Route::get('HojasRuta/eliminar/{idHR}', 'HojasRutaController@eliminar');
 
 // USUARIOS
 Route::get('User/listado', 'UserController@listado');

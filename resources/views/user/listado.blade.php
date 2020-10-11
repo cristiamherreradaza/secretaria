@@ -33,7 +33,15 @@
                         <td>{{ $usuario->name }}</td>
                         <td>{{ $usuario->email }}</td>
                         <td>{{ $usuario->rol }}</td>
-                        <td>{{ $usuario->unidade->nombre }}</td>
+                        @if ($usuario->unidade)
+                            <td>
+                                {{ $usuario->unidade->nombre }}
+                            </td>
+                        @else
+                            <td>
+                                N/T
+                            </td>
+                        @endif
                         <td>
                             <button type="button" class="btn btn-warning" title="Editar usuarios"
                                 onclick="editar('{{ $usuario->id }}', '{{ $usuario->name }}', '{{ $usuario->email }}', '{{ $usuario->rol }}', '{{ $usuario->unidade_id }}')"><i
@@ -81,7 +89,7 @@
                                 <span class="text-danger">
                                     <i class="mr-2 mdi mdi-alert-circle"></i>
                                 </span>
-                                <input name="email" type="text" id="email" class="form-control" required>
+                                <input name="email" type="email" id="email" class="form-control" required>
                             </div>
                         </div>
 
@@ -123,6 +131,7 @@
                                     </span>
                                 </label>
                                 <select name="unidade_id" id="unidade_id" class="form-control">
+                                    <option value="">Seleccione</option>
                                     @foreach($unidades as $u)
                                     <option value="{{ $u->id }}">{{ $u->nombre }}</option>
                                     @endforeach
@@ -140,40 +149,6 @@
     </div>
 </div>
 <!-- fin modal nueva categoria -->
-
-<!-- inicio modal editar categoria -->
-<div id="editar_categorias" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">EDITAR CATEGORIA</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            </div>
-            <form action="{{ url('Categoria/actualizar') }}" method="POST">
-                @csrf
-                <div class="modal-body">
-                    <input type="hidden" name="id" id="id" value="">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="control-label">Nombre</label>
-                                <span class="text-danger">
-                                    <i class="mr-2 mdi mdi-alert-circle"></i>
-                                </span>
-                                <input name="nombre" type="text" id="nombre" class="form-control" required>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn waves-effect waves-light btn-block btn-success"
-                        onclick="actualizar_categoria()">ACTUALIZAR CATEGORIA</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<!-- fin modal editar categoria -->
 
 @stop
 
@@ -196,7 +171,7 @@
         $("#id").val('');
         $("#nombre").val('');
         $("#email").val('');
-        $("#rol").val('');
+        $("#rol").val('Administrador');
         $("#password").val('');
         $("#unidade_id").val('');
 

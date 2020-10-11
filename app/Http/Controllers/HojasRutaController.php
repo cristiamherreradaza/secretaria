@@ -18,7 +18,13 @@ class HojasRutaController extends Controller
 
     public function guarda(Request $request)
     {
-        $hr = new Hojas_ruta();
+        $gestion = date("Y");
+        if ($request->id != null) {
+            $hr = Hojas_ruta::find($request->id);
+        } else {
+            $hr = new Hojas_ruta();
+            $hr->gestion = $gestion;
+        }
         $hr->user_id             = Auth::user()->id;
         $hr->unidad_solicitante  = $request->unidad_solicitante;
         $hr->hoja_ruta           = $request->hoja_ruta;
@@ -43,7 +49,8 @@ class HojasRutaController extends Controller
                             'hojas_rutas.hoja_ruta',
                             'hojas_rutas.fecha',
                             'hojas_rutas.unidad_solicitante',
-                            'hojas_rutas.detalle'
+                            'hojas_rutas.detalle',
+                            'hojas_rutas.gestion'
                         )
                         ->leftJoin('users', 'hojas_rutas.user_id', '=', 'users.id')
                         ->orderBy('id', 'desc');
@@ -51,7 +58,7 @@ class HojasRutaController extends Controller
         return Datatables::of($hr)->addColumn('action', function ($hr) {
             return '<button type="button" class="btn btn-info" title="Asignar" onclick="asignar(' . $hr->id . ')"><i class="fas fa-arrow-alt-circle-right"></i></button>
                     <button type="button" class="btn btn-warning" title="Editar"  onclick="editar(' . $hr->id . ')"><i class="fas fa-pencil-alt"></i></button>
-                    <button type="button" class="btn btn-danger" title="Eliminar"  onclick="eliminar(' . $hr->id . ')"><i class="fas fa-times"></i></button>';
+                    <button type="button" class="btn btn-danger" title="Eliminar"  onclick="eliminar(' . $hr->id . ', `'. $hr->hoja_ruta .'`)"><i class="fas fa-times"></i></button>';
         })->make(true);
 
     }
@@ -88,7 +95,8 @@ class HojasRutaController extends Controller
                             'unidades.nombre as unidad',
                             'hojas_rutas.fecha',
                             'hojas_rutas.unidad_solicitante',
-                            'hojas_rutas.detalle'
+                            'hojas_rutas.detalle',
+                            'hojas_rutas.gestion'
                         )
                         ->leftJoin('users', 'hojas_rutas.user_id', '=', 'users.id')
                         ->leftJoin('unidades', 'hojas_rutas.unidade_id', '=', 'unidades.id')
@@ -100,6 +108,18 @@ class HojasRutaController extends Controller
                     <button type="button" class="btn btn-danger" title="Eliminar"  onclick="eliminar(' . $hr->id . ')"><i class="fas fa-times"></i></button>';
         })->make(true);
 
+    }
+
+    public function editar(Request $request, $hRId)
+    {
+        $datosHR = Hojas_ruta::where("id", $hRId)->first();
+        return view('hojasruta.registro')->with(compact('datosHR'));
+    }
+
+    public function eliminar(Request $request, $HRId)
+    {
+        Hojas_ruta::destroy($HRId);
+        return redirect('HojasRuta/listado');
     }
 
 }

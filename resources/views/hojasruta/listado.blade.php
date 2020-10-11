@@ -27,6 +27,7 @@
                             <th>Ingreso</th>
                             <th>Unidad</th>
                             <th>Detalle</th>
+                            <th>Gestion</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
@@ -61,6 +62,7 @@
                 {data: 'fecha', name: 'fecha'},
                 {data: 'unidad_solicitante', name: 'unidad_solicitante'},
                 {data: 'detalle', name: 'detalle'},
+                {data: 'gestion', name: 'gestion'},
                 {data: 'action'},
             ],
             language: {
@@ -74,6 +76,37 @@
     {
         window.location.href = "{{ url('HojasRuta/asignar') }}/"+id;
     }
+
+    function editar(idHR)
+    {
+        window.location.href = "{{ url('HojasRuta/editar') }}/"+idHR;
+    }
+
+    function eliminar(idHR, hr)
+    {
+        Swal.fire({
+            title: 'Quieres borrar ' + hr + '?',
+            text: "Luego no podras recuperarlo!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, estoy seguro!',
+            cancelButtonText: "Cancelar",
+        }).then((result) => {
+            if (result.value) {
+                window.location.href = "{{ url('HojasRuta/eliminar') }}/"+idHR;
+
+                Swal.fire(
+                    'Excelente!',
+                    'La categoria fue eliminada',
+                    'success'
+                );
+            }
+        })
+
+    }
+
 
 </script>
 

@@ -27,7 +27,11 @@
                                         <i class="mr-2 mdi mdi-alert-circle"></i>
                                     </span>
                                 </label>
-                                <input type="text" name="hoja_ruta" id="hoja_ruta" class="form-control" required autofocus />
+                                @if (!empty($datosHR))
+                                    <input type="text" name="hoja_ruta" id="hoja_ruta" class="form-control" value="{{ $datosHR->hoja_ruta }}" required autofocus />
+                                @else
+                                    <input type="text" name="hoja_ruta" id="hoja_ruta" class="form-control" required autofocus />
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -38,7 +42,12 @@
                                         <i class="mr-2 mdi mdi-alert-circle"></i>
                                     </span>
                                 </label>
-                                <input type="date" name="fecha" id="fecha" class="form-control" value="{{ date("Y-m-d") }}" required>
+                                
+                                @if(!empty($datosHR))
+                                    <input type="date" name="fecha" id="fecha" class="form-control" value="{{ $datosHR->fecha }}" required>
+                                @else
+                                    <input type="date" name="fecha" id="fecha" class="form-control" value="{{ date("Y-m-d") }}" required>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -52,7 +61,14 @@
                                         <i class="mr-2 mdi mdi-alert-circle"></i>
                                     </span>
                                 </label>
-                                <input type="text" name="unidad_solicitante" id="unidad_solicitante" class="form-control" required autocomplete="on">
+                                @if (!empty($datosHR))
+                                    <input type="hidden" name="id" value="{{ $datosHR->id }}">
+                                @endif
+                                @if (!empty($datosHR))
+                                    <input type="text" name="unidad_solicitante" id="unidad_solicitante" class="form-control" value="{{ $datosHR->unidad_solicitante }}" required autocomplete="on">
+                                @else
+                                    <input type="text" name="unidad_solicitante" id="unidad_solicitante" class="form-control" required autocomplete="on">
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -63,7 +79,11 @@
                                         <i class="mr-2 mdi mdi-alert-circle"></i>
                                     </span>
                                 </label>
-                                <input type="text" name="detalle" id="detalle" class="form-control" required>
+                                @if (!empty($datosHR))
+                                    <input type="text" name="detalle" id="detalle" class="form-control" value="{{ $datosHR->detalle }}" required>
+                                @else
+                                    <input type="text" name="detalle" id="detalle" class="form-control" required>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -72,7 +92,11 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">Observaciones</label>
-                                <input type="text" name="observacion" id="observacion" class="form-control" >
+                                @if (!empty($datosHR))
+                                    <input type="text" name="observacion" id="observacion" class="form-control" value="{{ $datosHR->obs_correspondencia }}" >
+                                @else
+                                    <input type="text" name="observacion" id="observacion" class="form-control" >
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -83,7 +107,7 @@
                                 <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                 Cargando...
                             </button>
-                            <button type="button" id="btnRegistra" class="btn waves-effect waves-light btn-block btn-success text-white" onclick="registraHr();">REGISTRAR CORRESPONDENCIA</button>
+                            <button type="button" id="btnRegistra" class="btn waves-effect waves-light btn-block btn-success text-white" onclick="registraHr();">GUARDAR</button>
                         </div>
                     </div>
 
@@ -113,7 +137,7 @@
 
     function registraHr()
     {
-        if ($("#formularioRegistro")[0].checkValidity()) 
+        if ($("#formularioRegistro")[0].checkValidity())
         {
             $("#btnRegistra").toggle();
             $("#btnEsperaRegistro").toggle();
@@ -122,7 +146,7 @@
             Swal.fire({
                 type: 'success',
                 title: 'Excelente',
-                text: 'Se registro'
+                text: 'Se creo la hoja de ruta'
             });
 
         }else{
